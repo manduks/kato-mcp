@@ -1,0 +1,59 @@
+name: MCP Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "validate (no publish) or publish"
+        required: true
+        default: validate
+        type: choice
+        options: [validate, publish]
+
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.1
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Bundle on the release matches server.json
+        run: |
+          set -euo pipefail
+          url=$(jq -r '.packages[0].identifier' server.json)
+          want=$(jq -r '.packages[0].fileSha256' server.json)
+          curl --fail -sSL -o bundle.mcpb "$url"
+          got=$(sha256sum bundle.mcpb | cut -d' ' -f1)
+          echo "want=$want got=$got"
+          test "$want" = "$got"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+
+      - name: Download and verify mcp-publisher
+        run: |
+          set -euo pipefail
+          archive="mcp-publisher_linux_amd64.tar.gz"
+          base_url="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+          curl --fail -sSL -o "$archive" "$base_url/$archive"
+          curl --fail -sSL -o "$archive.sigstore.json" "$base_url/$archive.sigstore.json"
+          cosign verify-blob \
+            --bundle "$archive.sigstore.json" \
+            --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            "$archive"
+          tar xzf "$archive" mcp-publisher
+          ./mcp-publisher --help | head -20
+
+      - name: Validate
+        run: ./mcp-publisher validate server.json
+
+      - name: Publish
+        if: ${{ inputs.mode == 'publish' }}
+        run: |
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish server.json
