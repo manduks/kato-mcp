@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.manduks/kato",
+  "title": "Kato",
+  "description": "What was said, shown and promised on your client's calls, filed by client. Needs the Kato app.",
+  "repository": { "url": "https://github.com/manduks/kato-mcp", "source": "github" },
+  "websiteUrl": "https://installkato.com/?utm_medium=listing&utm_source=mcp-registry",
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/manduks/kato-mcp/releases/download/v0.2.0/kato-mcp.mcpb",
+      "fileSha256": "d0b45afc271c6b908d2a7b51e0c2fe645d079c9a3829854fee7de0d612c8a9c3",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}

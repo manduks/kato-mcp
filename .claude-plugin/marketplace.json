@@ -1,0 +1,8 @@
+{
+  "name": "kato",
+  "description": "Kato: the eyes and ears of your agents.",
+  "owner": { "name": "Kato" },
+  "plugins": [
+    { "name": "kato", "source": "./", "description": "What was said, shown and promised on your client's calls, filed by client, from the Mac Kato runs on. Needs the Kato app." }
+  ]
+}

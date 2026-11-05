@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "kato": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/kato-mcp.sh"
+    }
+  }
+}
