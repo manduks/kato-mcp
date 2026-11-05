@@ -10,7 +10,7 @@ Know what the app does before you install it. It starts on its own on any call, 
 
 ## What this plugin runs and sends
 
-- `bin/kato-mcp.sh` starts `~/.local/bin/kato mcp ~/kato`, a local server over stdio, in the folder it was started in (in Claude's desktop app, the client folder you picked). If that file is missing, it prints where to get Kato and stops.
+- `bin/kato-mcp.sh` starts `~/.local/bin/kato mcp ~/kato`, a local server over stdio, in the folder it was started in (in Claude's desktop app, the client folder you picked). If that file is missing, it prints where to get Kato and stops; in Claude's desktop app, every tool call answers with that link instead, and the same for a folder not picked yet or gone.
 - `hooks/session-start.sh` runs the same local tool at session start and prints at most 5 lines of what is new for the client this folder is bound to, or one line if Kato isn't installed.
 - `skills/whats-new` tells the agent when to ask.
 
@@ -31,7 +31,7 @@ Run `/reload-plugins` or start a new session afterwards. The server reads the br
 
 ### Claude's desktop app
 
-Claude's desktop app doesn't start Kato in a folder, so Kato asks you for one. Download `kato-mcp.mcpb` from the [latest release](https://github.com/manduks/kato-mcp/releases/latest), open it, and pick a **Client folder** when Claude asks. Bind that folder first (next section): a folder bound to no client gets a refusal from every tool. Kato in Claude's app then answers for that folder's client and nothing else, or for every client if you bound it with `--all`. Every conversation in Claude's app uses this one folder.
+Claude's desktop app doesn't start Kato in a folder, so Kato needs you to pick one. Download `kato-mcp.mcpb` from the [latest release](https://github.com/manduks/kato-mcp/releases/latest), open it and press **Install**; Claude turns Kato on. Then open Settings > Extensions > Kato and pick the **Client folder**. Until you do, every Kato tool answers with that step. Bind that folder first (next section): a folder bound to no client gets a refusal from every tool. Kato in Claude's app then answers for that folder's client and nothing else, or for every client if you bound it with `--all`. Every conversation in Claude's app uses this one folder.
 
 ## Bind a folder to a client
 

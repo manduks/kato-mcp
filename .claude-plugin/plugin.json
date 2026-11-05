@@ -1,7 +1,7 @@
 {
   "name": "kato",
   "displayName": "Kato",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The eyes and ears of your agents: what was said, shown and promised on your client's calls, filed by client, from the Mac Kato runs on. Needs the Kato app.",
   "author": {
     "name": "Kato"
