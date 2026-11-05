@@ -1,9 +1,11 @@
 {
   "name": "kato",
   "displayName": "Kato",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The eyes and ears of your agents: what was said, shown and promised on your client's calls, filed by client, from the Mac Kato runs on. Needs the Kato app.",
-  "author": { "name": "Kato" },
+  "author": {
+    "name": "Kato"
+  },
   "homepage": "https://installkato.com/?utm_medium=listing&utm_source=plugin",
   "repository": "https://github.com/manduks/kato-mcp",
   "license": "MIT"

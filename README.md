@@ -10,7 +10,7 @@ Know what the app does before you install it. It starts on its own on any call, 
 
 ## What this plugin runs and sends
 
-- `bin/kato-mcp.sh` starts `~/.local/bin/kato mcp ~/kato`, a local server over stdio. If that file is missing, it prints where to get Kato and stops.
+- `bin/kato-mcp.sh` starts `~/.local/bin/kato mcp ~/kato`, a local server over stdio, in the folder it was started in (in Claude's desktop app, the client folder you picked). If that file is missing, it prints where to get Kato and stops.
 - `hooks/session-start.sh` runs the same local tool at session start and prints at most 5 lines of what is new for the client this folder is bound to, or one line if Kato isn't installed.
 - `skills/whats-new` tells the agent when to ask.
 
@@ -28,6 +28,10 @@ claude plugin install kato@kato
 ```
 
 Run `/reload-plugins` or start a new session afterwards. The server reads the brain at `~/kato`. Elsewhere, use `kato connect <brain>` instead, which also registers Kato in Cursor, Codex and OpenCode. Pick one: with both, Claude Code shows the tools twice.
+
+### Claude's desktop app
+
+Claude's desktop app doesn't start Kato in a folder, so Kato asks you for one. Download `kato-mcp.mcpb` from the [latest release](https://github.com/manduks/kato-mcp/releases/latest), open it, and pick a **Client folder** when Claude asks. Bind that folder first (next section): a folder bound to no client gets a refusal from every tool. Kato in Claude's app then answers for that folder's client and nothing else, or for every client if you bound it with `--all`. Every conversation in Claude's app uses this one folder.
 
 ## Bind a folder to a client
 
