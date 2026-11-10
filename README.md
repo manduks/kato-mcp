@@ -109,3 +109,9 @@ The hook prints only a digest it can parse (one JSON line from `kato new
 folder's place forward only after the digest is written and only while there is
 still time for the hook to print it (3.5 s into its 5 s), so a slow start repeats
 the news next session instead of skipping it.
+
+## License
+
+The files in this repository (the plugin, its hooks and the MCP shim) are MIT
+licensed; see `LICENSE`. The Kato app they talk to is proprietary and sold
+separately at [installkato.com](https://installkato.com).
